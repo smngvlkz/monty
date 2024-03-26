@@ -37,5 +37,6 @@ extern global_t vglo;
 
 /* PROTOTYPES */
 void _push(stack_t **stack, unsigned int line_number);
+void pall_it(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
