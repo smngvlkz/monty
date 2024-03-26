@@ -37,3 +37,28 @@ void _push(stack_t **stack, unsigned int line_number)
 	else
 		add_dnodeint_end(stack, i);
 }
+
+
+
+/**
+ * pall_it - Prints the stack
+ *
+ * @head: stack head
+ *@counter: no used
+ *
+ * Return: no return
+ */
+void pall_it(stack_t **head, unsigned int counter)
+{
+	stack_t *h;
+	(void)counter;
+
+	h = *head;
+	if (h == NULL)
+		return;
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+	}
+}
