@@ -1,5 +1,7 @@
 #include "monty.h"
 
+global_t vglo;
+
 /**
  * main - monty code interpreter
  * @argc: number of arguments

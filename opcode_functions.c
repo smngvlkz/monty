@@ -1,5 +1,7 @@
 #include "monty.h"
 
+global_t vglo;
+
 /**
  * _push - pushes an element to the stack
  * @stack: head of linked list

@@ -33,6 +33,23 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
+/**
+ * struct global_s - global argument variable
+ * and LIFO/FIFO flag
+ * @arg: argument to opcode
+ * @life: flag to indicate data structure is stack
+ * or queue
+ *
+ * Description: gloabl variable for stack, queues
+ * LIFO, FIFO
+ */
+typedef struct global_s
+{
+	char *arg;
+	int lifo;
+} global_t;
+
 extern global_t vglo;
 
 /* PROTOTYPES */
