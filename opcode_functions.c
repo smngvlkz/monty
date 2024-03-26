@@ -37,6 +37,3 @@ void _push(stack_t **stack, unsigned int line_number)
 	else
 		add_dnodeint_end(stack, i);
 }
-
-
-	
