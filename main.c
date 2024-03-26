@@ -1,4 +1,7 @@
 #include "monty.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdio.h>
 
 global_t vglo;
 
@@ -13,7 +16,7 @@ int main(int argc, char *argv[])
 	FILE *file;
 	char *line = NULL;
 	size_t len = 0;
-	ssize_t read;
+	size_t read;
 	unsigned int line_number = 0;
 	char *opcode;
 	stack_t *stack = NULL;
@@ -23,7 +26,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-i
+
 	file = fopen(argv[1], "r");
 	if (!file)
 	{

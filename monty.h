@@ -55,5 +55,7 @@ extern global_t vglo;
 /* PROTOTYPES */
 void _push(stack_t **stack, unsigned int line_number);
 void pall_it(stack_t **stack, unsigned int line_number);
+void add_dnodeint(stack_t **stack, int n);
+void add_dnodeint_end(stack_t **stack, int n);
 
 #endif /* MONTY_H */
