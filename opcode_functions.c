@@ -44,7 +44,7 @@ void _push(stack_t **stack, unsigned int line_number)
  * pall_it - Prints the stack
  *
  * @head: stack head
- *@counter: no used
+ * @counter: no used
  *
  * Return: no return
  */
@@ -61,4 +61,24 @@ void pall_it(stack_t **head, unsigned int counter)
 		printf("%d\n", h->n);
 		h = h->next;
 	}
+}
+
+/**
+ * _pint - prints the value at the top of the stack
+ *
+ * @head: head of the linked list
+ * @line_number: line number
+ * Return: no return
+ */
+void _pint(stack_t **head, unsigned int line_number)
+{
+	(!*head)
+	{
+		dprintf(2, "L%u: ", line_number);
+		dprintf(2, "can't pint, stack empty\n");
+		free_vglo();
+		exit(EXIT_FAILURE);
+	}
+
+	printf("%d\n", (*head)->n);
 }
