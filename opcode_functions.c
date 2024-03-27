@@ -75,7 +75,7 @@ void pall_it(stack_t **head, unsigned int counter)
  */
 void _pint(stack_t **head, unsigned int line_number)
 {
-	(!*head)
+	if (!*head)
 	{
 		dprintf(2, "L%u: ", line_number);
 		dprintf(2, "can't pint, stack empty\n");
