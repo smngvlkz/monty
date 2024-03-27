@@ -1,4 +1,7 @@
 #include "monty.h"
+#include <ctype.h>
+
+global_t vglo;
 
 /**
  * _push - pushes an element to the stack
