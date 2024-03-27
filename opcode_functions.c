@@ -28,7 +28,7 @@ void _push(stack_t **stack, unsigned int line_number)
 		{
 			dprintf(2, "L%u: ", line_number);
 			dprintf(2, "usage: push integer\n");
-			free_vglo();
+			clear_vglo();
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -36,11 +36,10 @@ void _push(stack_t **stack, unsigned int line_number)
 	i = atoi(vglo.arg);
 
 	if (vglo.lifo == 1)
-		add_dnodeint(stack, i);
+		append_node(stack, i);
 	else
-		add_dnodeint_end(stack, i);
+		append_node_end(stack, i);
 }
-
 
 
 /**
@@ -70,18 +69,74 @@ void pall_it(stack_t **head, unsigned int counter)
  * _pint - prints the value at the top of the stack
  *
  * @head: head of the linked list
- * @line_number: line number
+ * @nlines: line number
  * Return: no return
  */
-void _pint(stack_t **head, unsigned int line_number)
+void _pint(stack_t **head, unsigned int nlines)
 {
-	if (!*head)
+	(void)nlines;
+
+	if (*head == NULL)
 	{
-		dprintf(2, "L%u: ", line_number);
+		dprintf(2, "L%u: ", nlines);
 		dprintf(2, "can't pint, stack empty\n");
-		free_vglo();
+		clear_vglo();
 		exit(EXIT_FAILURE);
 	}
 
-	printf("%d\n", (*head)->n);
+	print("%d\n", (*head)->n);
+}
+
+/**
+ * _pop - removes the top element of the stack
+ *
+ * @head: head of the linked list
+ * @nlines: line number
+ * Return: no return
+ */
+void _pop(stack_t **head, unsigned int nlines)
+{
+	stack_t *h;
+
+	if (head == NULL || *head == NULL)
+	{
+		dprintf(2, "L%u: cn't pop an empy stack\n", nlines);
+		clear_vglo();
+		exit(EXIT_FAILURE);
+	}
+	h = *head;
+	*head = (*head)->next;
+	free(h);
+}
+
+/**
+ * _swap - swaps thw top two elements of the stack
+ *
+ * @head: head of the linked list
+ * @nlines: line number
+ * Return: no return
+ */
+void _swap(stack_t **head, unsigned int nlines)
+{
+	int n = 0;
+	stack_t *h = NULL;
+
+	h = *head;
+
+	for (; h != NULL; h = h->next, n++)
+		;
+
+	if (n < 2)
+	{
+		dprintf(2, "L%u: can't swap, stack too short\n", nlines);
+		clear_vglo();
+		exit(EXIT_FAILURE);
+	}
+
+	h = *head;
+	*head = (*head)->next;
+	h->next = (*head)->next;
+	h->prev = *head;
+	(*head)->next = h;
+	(*head)->prev = NULL;
 }

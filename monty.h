@@ -3,6 +3,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
 
 /**
  * struct stact_s - doubly linked list of a stack/queue
@@ -48,20 +54,29 @@ typedef struct global_s
 {
 	char *arg;
 	int lifo;
+	unsigned int cont;
+	stack_t *head;
+	FILE *fd;
+	char *buffer;
 } global_t;
 
 extern global_t vglo;
 
 /* PROTOTYPES */
 void _push(stack_t **stack, unsigned int line_number);
-void pall_it(stack_t **stack, unsigned int line_number);
+void pall_it(stack_t **stack, unsigned int counter);
 void _pint(stack_t **head, unsigned int line_number);
+void _pop(stack_t **head, unsigned int nlines);
+void _swap(stack_t **head, unsigned int nlines);
+
+/* fetch function */
+void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
 
 /* doubly linked list functions */
-void add_dnodeint(stack_t **stack, int n);
-void add_dnodeint_end(stack_t **stack, int n);
-
+void append_node(stack_t **stack, int n);
+void append_node_end(stack_t **stack, int n);
+void clear_dlist(stack_t *head);
 /* main */
-void free_vglo(void);
+void clear_vglo(void);
 
 #endif /* MONTY_H */
