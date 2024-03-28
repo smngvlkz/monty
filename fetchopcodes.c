@@ -16,6 +16,12 @@ void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 		{"pint", _pint},
 		{"pop", _pop},
 		{"swap", _swap},
+		{"add", add_it},
+		{"nop", nop_do},
+		{"stack", stack_set},
+		{"queue", queue_set},
+		{"sub", sub_it},
+		{"div", div_it},
 		{NULL, NULL}
 	};
 	int i;

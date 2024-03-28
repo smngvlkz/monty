@@ -69,7 +69,11 @@ void nop_do(stack_t **head, unsigned int counter);
 void _pint(stack_t **head, unsigned int line_number);
 void _pop(stack_t **head, unsigned int nlines);
 void _swap(stack_t **head, unsigned int nlines);
-void add_it(stack_t *head, unsigned int counter);
+void add_it(stack_t **head, unsigned int counter);
+void sub_it(stack_t **head, unsigned int counter);
+void stack_set(stack_t **head, unsigned int counter);
+void queue_set(stack_t **head, unsigned int counter);
+void div_it(stack_t **head, unsigned int nlines);
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
@@ -78,6 +82,12 @@ void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
 stack_t *append_node_end(stack_t **stack, int n);
 void append_node(stack_t **head, int n);
 void clear_dlist(stack_t *head);
+
+/* imported */
+char *_strtoki(char *s, char *d);
+int search_char(char *s, char c);
+int _strcmp(char *s1, char *s2);
+
 /* main */
 void clear_vglo(void);
 
