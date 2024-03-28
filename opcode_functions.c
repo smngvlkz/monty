@@ -15,16 +15,16 @@ void _push(stack_t **stack, unsigned int line_number)
 
     if (!vglo.arg)
     {
-        dprintf(2, "L%u: usage: push integer\n", line_number);
-        exit(EXIT_FAILURE);
+	    fprintf(stderr, "L%u: usage: push integer\n", line_number);
+	    exit(EXIT_FAILURE);
     }
 
     for (r = 0; vglo.arg[r] != '\0'; r++)
     {
         if (!isdigit(vglo.arg[r]) && vglo.arg[r] != '-')
         {
-            dprintf(2, "L%u: usage: push integer\n", line_number);
-            exit(EXIT_FAILURE);
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
         }
     }
 
@@ -43,9 +43,11 @@ void _push(stack_t **stack, unsigned int line_number)
  *
  * Return: no return
  */
-void pall_it(stack_t **stack, unsigned int counter);
+void pall_it(stack_t **stack, unsigned int counter)
 {
     stack_t *h;
+
+    (void)counter;
 
     h = *stack;
     if (h == NULL)
