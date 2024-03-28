@@ -22,6 +22,8 @@ void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 		{"queue", queue_set},
 		{"sub", sub_it},
 		{"div", div_it},
+		{"mul", mul_it},
+		{"mod", mod_it},
 		{NULL, NULL}
 	};
 	int i;
