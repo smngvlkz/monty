@@ -1,7 +1,6 @@
 #include "monty.h"
+#include <stdio.h>
 #include <ctype.h>
-
-global_t vglo;
 
 /**
  * _push - pushes an element to the stack
@@ -16,9 +15,7 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	if (!vglo.arg)
 	{
-		dprintf(2, "L%u: ", line_number);
-		dprintf(2, "usage: push integer\n");
-		free_vglo();
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -26,9 +23,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	{
 		if (!isdigit(vglo.arg[r]) && vglo.arg[r] != '-')
 		{
-			dprintf(2, "L%u: ", line_number);
-			dprintf(2, "usage: push integer\n");
-			clear_vglo();
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -41,23 +36,24 @@ void _push(stack_t **stack, unsigned int line_number)
 		append_node_end(stack, i);
 }
 
-
 /**
  * pall_it - Prints the stack
  *
- * @head: stack head
- * @counter: no used
+ * @stack: stack head
+ * @counter: unused parameter
  *
  * Return: no return
  */
-void pall_it(stack_t **head, unsigned int counter)
+void pall_it(stack_t **stack, unsigned int counter)
 {
 	stack_t *h;
+
 	(void)counter;
 
-	h = *head;
+	h = *stack;
 	if (h == NULL)
 		return;
+
 	while (h)
 	{
 		printf("%d\n", h->n);
@@ -74,17 +70,13 @@ void pall_it(stack_t **head, unsigned int counter)
  */
 void _pint(stack_t **head, unsigned int nlines)
 {
-	(void)nlines;
-
 	if (*head == NULL)
 	{
-		dprintf(2, "L%u: ", nlines);
-		dprintf(2, "can't pint, stack empty\n");
-		clear_vglo();
+		fprintf(stderr, "L%u: can't pint, stack empty\n", nlines);
 		exit(EXIT_FAILURE);
 	}
 
-	print("%d\n", (*head)->n);
+	printf("%d\n", (*head)->n);
 }
 
 /**
@@ -100,7 +92,7 @@ void _pop(stack_t **head, unsigned int nlines)
 
 	if (head == NULL || *head == NULL)
 	{
-		dprintf(2, "L%u: cn't pop an empy stack\n", nlines);
+		fprintf(stderr, "L%u: can't pop an empty stack\n", nlines);
 		clear_vglo();
 		exit(EXIT_FAILURE);
 	}
@@ -110,7 +102,7 @@ void _pop(stack_t **head, unsigned int nlines)
 }
 
 /**
- * _swap - swaps thw top two elements of the stack
+ * _swap - swaps the top two elements of the stack
  *
  * @head: head of the linked list
  * @nlines: line number
@@ -128,7 +120,7 @@ void _swap(stack_t **head, unsigned int nlines)
 
 	if (n < 2)
 	{
-		dprintf(2, "L%u: can't swap, stack too short\n", nlines);
+		fprintf(stderr, "L%u: can't swap, stack too short\n", nlines);
 		clear_vglo();
 		exit(EXIT_FAILURE);
 	}

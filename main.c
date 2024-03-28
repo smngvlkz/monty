@@ -1,7 +1,7 @@
 #include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <stdio.h>
 
 global_t vglo;
 
@@ -25,7 +25,7 @@ void clear_vglo(void)
  */
 void initialize_vglo(FILE *fd)
 {
-	vglo.life = 1;
+	vglo.lifo = 1;
 	vglo.cont = 1;
 	vglo.arg = NULL;
 	vglo.head = NULL;
@@ -34,8 +34,7 @@ void initialize_vglo(FILE *fd)
 }
 
 /**
- * validate_input - checks if the file exists and file
- * can be opened
+ * validate_input - checks if the file exists and file can be opened
  *
  * @argc: argument count
  * @argv: argument vector
@@ -43,64 +42,60 @@ void initialize_vglo(FILE *fd)
  */
 FILE *validate_input(int argc, char *argv[])
 {
-	FILE *fd;
+    FILE *fd;
 
-	if (argc == 1 || argc > 2)
-	{
-		dprintf(2, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+    if (argc == 1 || argc > 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
+    }
 
-	fd = fopen(argv[1], "r");
+    fd = fopen(argv[1], "r");
 
-	if (fd == NULL)
-	{
-		dprintf(2, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+    if (fd == NULL)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
 
-	return (fd);
+    return fd;
 }
 
 /**
  * main - monty code interpreter
- *
  * @argc: number of arguments
  * @argv: monty file location
  * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
-	void (*f)(stact_t **stack, unsigned int line_number);
-	FILE *fd;
-	size_t size = 256;
-	ssize_t line_n = 0;
-	char *lines[2] = {NULL, NULL};
+    void (*f)(stack_t **stack, unsigned int line_number);
+    FILE *fd;
+    size_t size = 256;
+    char *lines[2] = {NULL, NULL};
 
-	fd = validate_input(argc, argv);
-	initialize_vglo(fd);
-	line_n = getlines(&vglo.bugger, &size, fd);
-	while (line_n != -1)
-	{
-		lines[0] = strtok(vglo.buffer, " \t\n");
-		if (lines[0] && lines[0][0] != '#')
-		{
-			f = fetch_opcodes(lines[0]);
-			if (!f)
-			{
-				dprintf(2, "L%u: ", vglo.cont);
-				dprintf(2, "unknown instruction %s\n", lines[0]);
-				clear_vglo();
-				exit(EXIT_FAILURE);
-			}
-			vglo.arg = strtok(NULL, " \t\n");
-			f(&vglo.head, vglo.count);
-		}
-		line_n = getline(&vglo.buffer, &size, fd);
-		vglo.count++;
-	}
+    fd = validate_input(argc, argv);
+    initialize_vglo(fd);
 
-	clear_vglo();
+    while (fgets(vglo.buffer, size, fd) != NULL)
+    {
+        char *token = strtok(vglo.buffer, " \t\n");
+        lines[0] = token;
+        if (lines[0] && lines[0][0] != '#')
+        {
+            f = fetch_opcodes(lines[0]);
+            if (!f)
+            {
+                fprintf(stderr, "L%u: Unknown instruction: %s\n", vglo.cont, lines[0]);
+                clear_vglo();
+                exit(EXIT_FAILURE);
+            }
+            vglo.arg = strtok(NULL, " \t\n");
+            f(&vglo.head, vglo.cont);
+        }
+        vglo.cont++;
+    }
 
-	return (0);
+    clear_vglo();
+    return 0;
 }

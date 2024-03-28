@@ -1,12 +1,12 @@
 #include "monty.h"
+#include <string.h>
 
 /**
  * fetch_opcodes - selects the correct opcode to perform
  *
  * @opc: opcode passed
  *
- * Return: pointer to the function that executes
- * the opcode
+ * Return: pointer to the function that executes the opcode
  */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 {
@@ -18,14 +18,27 @@ void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 		{"swap", _swap},
 		{NULL, NULL}
 	};
-
 	int i;
 
-	for (i = 0; instuct[i].opcode; i++)
+	for (i = 0; instruct[i].opcode; i++)
 	{
-		if (_strcmp(instruct[i].opcode, opc) == 0)
-			break;
-	}
 
-	return (instruct[i].f);
+		if (strcmp(instruct[i].opcode, opc) == 0)
+			return (instruct[i].f);
+	}
+	return (NULL);
+}
+
+
+#include "monty.h"
+/**
+ * nop_do - nothing
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+ */
+void nop_do(stack_t **head, unsigned int counter)
+{
+	(void) counter;
+	(void) head;
 }

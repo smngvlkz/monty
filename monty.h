@@ -65,6 +65,7 @@ extern global_t vglo;
 /* PROTOTYPES */
 void _push(stack_t **stack, unsigned int line_number);
 void pall_it(stack_t **stack, unsigned int counter);
+void nop_do(stack_t **head, unsigned int counter);
 void _pint(stack_t **head, unsigned int line_number);
 void _pop(stack_t **head, unsigned int nlines);
 void _swap(stack_t **head, unsigned int nlines);
@@ -73,8 +74,8 @@ void _swap(stack_t **head, unsigned int nlines);
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
 
 /* doubly linked list functions */
-void append_node(stack_t **stack, int n);
-void append_node_end(stack_t **stack, int n);
+stack_t *append_node_end(stack_t **stack, int n);
+void append_node(stack_t **head, int n);
 void clear_dlist(stack_t *head);
 /* main */
 void clear_vglo(void);
