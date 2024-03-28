@@ -74,6 +74,8 @@ void sub_it(stack_t **head, unsigned int counter);
 void stack_set(stack_t **head, unsigned int counter);
 void queue_set(stack_t **head, unsigned int counter);
 void div_it(stack_t **head, unsigned int nlines);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
