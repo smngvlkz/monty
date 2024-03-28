@@ -69,6 +69,7 @@ void nop_do(stack_t **head, unsigned int counter);
 void _pint(stack_t **head, unsigned int line_number);
 void _pop(stack_t **head, unsigned int nlines);
 void _swap(stack_t **head, unsigned int nlines);
+void add_it(stack_t *head, unsigned int counter);
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);

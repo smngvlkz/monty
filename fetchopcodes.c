@@ -28,17 +28,3 @@ void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 	}
 	return (NULL);
 }
-
-
-#include "monty.h"
-/**
- * nop_do - nothing
- * @head: stack head
- * @counter: line_number
- * Return: no return
- */
-void nop_do(stack_t **head, unsigned int counter)
-{
-	(void) counter;
-	(void) head;
-}
