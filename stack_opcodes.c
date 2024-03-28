@@ -20,16 +20,19 @@ void nop_do(stack_t **head, unsigned int counter)
  */
 void add_it(stack_t *head, unsigned int counter)
 {
-    int sum = head->n + head->next->n;
-    stack_t *temp = head->next;
+	int sum;
+	stack_t *temp;
 
-    if (head == NULL || head->next == NULL)
-    {
-        fprintf(stderr, "L%u: can't add, stack too short\n", counter);
-        return;
-    }
+	(void)counter;
 
-    head->next->n = sum;
-    head->next = head->next->next;
-    free(temp);
+	if (head == NULL || head->next == NULL)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", counter);
+		return;
+	}
+	sum = head->n + head->next->n;
+	temp = head->next;
+	head->next->n = sum;
+	head->next = head->next->next;
+	free(temp);
 }
