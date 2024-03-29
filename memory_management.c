@@ -6,21 +6,21 @@
  * @size: type of elements
  * Return: no return
  */
-void *calloc(unsigned int elem, unsigned int size)
+void *my_calloc(unsigned int nmeb, unsigned int size)
 {
 	void *c = NULL;
 	unsigned int i;
 
-	if (elem == 0 || size == 0)
+	if (nmeb == 0 || size == 0)
 	{
 		return (NULL);
 	}
-	c = malloc(elem * size);
+	c = malloc(nmeb * size);
 	if (c == NULL)
 	{
 		return (NULL);
 	}
-	for (i = 0; i < (elem * size); i++)
+	for (i = 0; i < (nmeb * size); i++)
 	{
 		*((char *)(c) + i) = 0;
 	}
@@ -34,7 +34,7 @@ void *calloc(unsigned int elem, unsigned int size)
  * @nsize: new number of bytes
  * Return: no return
  */
-void *realloc(void *ptr, unsigned int osize, unsigned int nsize)
+void *my_realloc(void *ptr, unsigned int osize, unsigned int nsize)
 {
 	char *c = NULL;
 	unsigned int i;

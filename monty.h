@@ -90,8 +90,8 @@ void clear_dlist(stack_t *head);
 char *_strtoki(char *s, char *d);
 int search_char(char *s, char c);
 int _strcmp(char *s1, char *s2);
-void *calloc(unsigned int elem, unsgined int size);
-void *realloc(void *ptr, unsigned int osize, unsigned int nsize);
+void *my_calloc(unsigned int nmeb, unsigned int size);
+void *my_realloc(void *ptr, unsigned int osize, unsigned int nsize);
 
 /* main */
 void clear_vglo(void);
