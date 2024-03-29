@@ -74,11 +74,14 @@ void sub_it(stack_t **head, unsigned int counter);
 void stack_set(stack_t **head, unsigned int counter);
 void queue_set(stack_t **head, unsigned int counter);
 void div_it(stack_t **head, unsigned int nlines);
-void pchar(stack_t **stack, unsigned int line_number);
-void pstr(stack_t **stack, unsigned int line_number);
+void mul_it(stack_t **head, unsigned int nlines);
+void mod_it(stack_t **head, unsigned int nlines);
+
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
 
 /* doubly linked list functions */
 stack_t *append_node_end(stack_t **stack, int n);
@@ -92,5 +95,4 @@ int _strcmp(char *s1, char *s2);
 
 /* main */
 void clear_vglo(void);
-
 #endif /* MONTY_H */

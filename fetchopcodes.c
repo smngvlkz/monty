@@ -11,20 +11,20 @@
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t instruct[] = {
-		{"push", _push},
-		{"pall", pall_it},
-		{"pint", _pint},
-		{"pop", _pop},
-		{"swap", _swap},
-		{"add", add_it},
-		{"nop", nop_do},
-		{"stack", stack_set},
-		{"queue", queue_set},
-		{"sub", sub_it},
-		{"div", div_it},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{NULL, NULL}
+        {"push", _push},
+        {"pall", pall_it},
+        {"pint", _pint},
+        {"pop", _pop},
+        {"swap", _swap},
+        {"add", add_it},
+        {"sub", sub_it},
+        {"mul", mul_it},
+        {"div", div_it},
+        {"mod", mod_it},
+        {"nop", nop_do},
+        {"stack", stack_set},
+        {"queue", queue_set},
+        {NULL, NULL}
 	};
 	int i;
 
