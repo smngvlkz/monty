@@ -80,6 +80,8 @@ void mod_it(stack_t **head, unsigned int nlines);
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
 
 /* doubly linked list functions */
 stack_t *append_node_end(stack_t **stack, int n);
@@ -95,5 +97,4 @@ void *my_realloc(void *ptr, unsigned int osize, unsigned int nsize);
 
 /* main */
 void clear_vglo(void);
-
 #endif /* MONTY_H */
