@@ -43,16 +43,13 @@ void my_rotr(stack_t **head, unsigned int nlines)
 {
 	stack_t *last = *head;
 	(void)nlines;
-	
 	if (*head == NULL || (*head)->next == NULL)
 		return;
-	
 	while (last->next != NULL)
 		last = last->next;
-	
 	last->prev->next = NULL;
-        last->next = *head;
-        last->prev = NULL;
-        (*head)->prev = last;
-        *head = last;
+	last->next = *head;
+	last->prev = NULL;
+	(*head)->prev = last;
+	*head = last;
 }
