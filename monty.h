@@ -77,7 +77,7 @@ void div_it(stack_t **head, unsigned int nlines);
 void mul_it(stack_t **head, unsigned int nlines);
 void mod_it(stack_t **head, unsigned int nlines);
 void my_rotr(stack_t **head, unsigned int nlines);
-void my_rot1(stack_t **head, unsigned int nlines);
+void my_rotl(stack_t **head, unsigned int nlines);
 
 /* fetch function */
 void (*fetch_opcodes(char *opc))(stack_t **stack, unsigned int line_number);

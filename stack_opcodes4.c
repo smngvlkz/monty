@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * my_rot1 - rotates the first element to the bottom and second to
+ * my_rotl - rotates the first element to the bottom and second to
  * the top
  * @head: head of the linked list
  * @nlines: line number
  * Return: no return
  */
-void my_rot1(stack_t **head, unsigned int nlines)
+void my_rotl(stack_t **head, unsigned int nlines)
 {
 	stack_t *h1 = NULL;
 	stack_t *h2 = NULL;
