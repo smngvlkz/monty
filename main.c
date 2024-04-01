@@ -3,16 +3,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+global_t vglo;
+
 /**
  * clear_vglo - frees global variables
  * @vglo: global variable struct
  * return: no return
  */
-void clear_vglo(global_t *vglo)
+void clear_vglo(void)
 {
-	clear_dlist(vglo->head);
-	free(vglo->buffer);
-	fclose(vglo->fd);
+	clear_dlist(vglo.head);
+	free(vglo.buffer);
+	fclose(vglo.fd);
 }
 
 /**
@@ -21,14 +23,14 @@ void clear_vglo(global_t *vglo)
  * @fd: file descriptor
  * Return: no return
  */
-void initialize_vglo(global_t *vglo, FILE *fd)
+void initialize_vglo(FILE *fd)
 {
-	vglo->lifo = 1;
-	vglo->cont = 1;
-	vglo->arg = NULL;
-	vglo->head = NULL;
-	vglo->fd = fd;
-	vglo->buffer = NULL;
+	vglo.lifo = 1;
+	vglo.cont = 1;
+	vglo.arg = NULL;
+	vglo.head = NULL;
+	vglo.fd = fd;
+	vglo.buffer = NULL;
 }
 
 /**

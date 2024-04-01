@@ -97,6 +97,6 @@ void *my_calloc(unsigned int nmeb, unsigned int size);
 void *my_realloc(void *ptr, unsigned int osize, unsigned int nsize);
 
 /* main */
-void clear_vglo(global_t *vglo);
-void initialize_vglo(global_t *vglo, FILE *fd);
+void clear_vglo(void);
+
 #endif /* MONTY_H */
