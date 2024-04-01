@@ -21,7 +21,7 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * search_char(char *s, char c)
+ * search_char - function to find a character in a string
  * @s: string to review
  * @c: char to find
  * Return: 1 if success 0 if not
