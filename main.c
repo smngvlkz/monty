@@ -3,34 +3,32 @@
 #include <stdlib.h>
 #include <string.h>
 
-global_t vglo;
-
 /**
  * clear_vglo - frees global variables
- *
+ * @vglo: global variable struct
  * return: no return
  */
-void clear_vglo(void)
+void clear_vglo(global_t *vglo)
 {
-	clear_dlist(vglo.head);
-	free(vglo.buffer);
-	fclose(vglo.fd);
+	clear_dlist(vglo->head);
+	free(vglo->buffer);
+	fclose(vglo->fd);
 }
 
 /**
  * initialize_vglo - initializes global variables
- *
+ * @vglo: global variable struct
  * @fd: file descriptor
  * Return: no return
  */
-void initialize_vglo(FILE *fd)
+void initialize_vglo(global_t *vglo, FILE *fd)
 {
-	vglo.lifo = 1;
-	vglo.cont = 1;
-	vglo.arg = NULL;
-	vglo.head = NULL;
-	vglo.fd = fd;
-	vglo.buffer = NULL;
+	vglo->lifo = 1;
+	vglo->cont = 1;
+	vglo->arg = NULL;
+	vglo->head = NULL;
+	vglo->fd = fd;
+	vglo->buffer = NULL;
 }
 
 /**
@@ -42,23 +40,23 @@ void initialize_vglo(FILE *fd)
  */
 FILE *validate_input(int argc, char *argv[])
 {
-    FILE *fd;
+	FILE *fd;
 
-    if (argc == 1 || argc > 2)
-    {
-        fprintf(stderr, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
+	if (argc == 1 || argc > 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 
-    fd = fopen(argv[1], "r");
+	fd = fopen(argv[1], "r");
 
-    if (fd == NULL)
-    {
-        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-        exit(EXIT_FAILURE);
-    }
+	if (fd == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
 
-    return fd;
+	return (fd);
 }
 
 /**
@@ -69,33 +67,34 @@ FILE *validate_input(int argc, char *argv[])
  */
 int main(int argc, char *argv[])
 {
-    void (*f)(stack_t **stack, unsigned int line_number);
-    FILE *fd;
-    size_t size = 256;
-    char *lines[2] = {NULL, NULL};
+	void (*f)(stack_t **stack, unsigned int line_number);
+	FILE *fd;
+	size_t size = 256;
+	char *lines[2] = {NULL, NULL};
 
-    fd = validate_input(argc, argv);
-    initialize_vglo(fd);
+	fd = validate_input(argc, argv);
+	initialize_vglo(fd);
 
-    while (fgets(vglo.buffer, size, fd) != NULL)
-    {
-        char *token = strtok(vglo.buffer, " \t\n");
-        lines[0] = token;
-        if (lines[0] && lines[0][0] != '#')
-        {
-            f = fetch_opcodes(lines[0]);
-            if (!f)
-            {
-                fprintf(stderr, "L%u: Unknown instruction: %s\n", vglo.cont, lines[0]);
-                clear_vglo();
-                exit(EXIT_FAILURE);
-            }
-            vglo.arg = strtok(NULL, " \t\n");
-            f(&vglo.head, vglo.cont);
-        }
-        vglo.cont++;
-    }
+	while (fgets(vglo.buffer, size, fd) != NULL)
+	{
+		char *token = strtok(vglo.buffer, " \t\n");
 
-    clear_vglo();
-    return 0;
+		lines[0] = token;
+		if (lines[0] && lines[0][0] != '#')
+		{
+			f = fetch_opcodes(lines[0]);
+			if (!f)
+			{
+				fprintf(stderr, "L%u: Unknown instruction: %s\n", vglo.cont, lines[0]);
+				clear_vglo();
+				exit(EXIT_FAILURE);
+			}
+			vglo.arg = strtok(NULL, " \t\n");
+			f(&vglo.head, vglo.cont);
+		}
+		vglo.cont++;
+	}
+
+	clear_vglo();
+	return (0);
 }
