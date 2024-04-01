@@ -11,54 +11,54 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
-    int i, r;
+	int i, r;
 
-    if (!vglo.arg)
-    {
-	    fprintf(stderr, "L%u: usage: push integer\n", line_number);
-	    exit(EXIT_FAILURE);
-    }
-
-    for (r = 0; vglo.arg[r] != '\0'; r++)
-    {
-        if (!isdigit(vglo.arg[r]) && vglo.arg[r] != '-')
-        {
+	if (!vglo.arg)
+	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
-        }
-    }
+	}
 
-    i = atoi(vglo.arg);
+	for (r = 0; vglo.arg[r] != '\0'; r++)
+	{
+		if (!isdigit(vglo.arg[r]) && vglo.arg[r] != '-')
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+	}
 
-    if (vglo.lifo == 1)
-        append_node(stack, i);
-    else
-        append_node_end(stack, i);
+	i = atoi(vglo.arg);
+
+	if (vglo.lifo == 1)
+		append_node(stack, i);
+	else
+		append_node_end(stack, i);
 }
 
 /**
  * pall_it - Prints the stack
- *
  * @stack: stack head
+ * @counter: line number
  *
  * Return: no return
  */
 void pall_it(stack_t **stack, unsigned int counter)
 {
-    stack_t *h;
+	stack_t *h;
 
-    (void)counter;
+	(void)counter;
 
-    h = *stack;
-    if (h == NULL)
-        return;
-    while (h)
-    {
-        printf("%d\n", h->n);
-        h = h->next;
-    }
+	h = *stack;
+
+	if (h == NULL)
+		return;
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+	}
 }
-
 
 /**
  * _pint - prints the value at the top of the stack
@@ -69,14 +69,14 @@ void pall_it(stack_t **stack, unsigned int counter)
  */
 void _pint(stack_t **head, unsigned int nlines)
 {
-    if (*head == NULL)
-    {
-        fprintf(stderr, "L%u: can't pint, stack empty\n", nlines);
-        clear_vglo();
-        exit(EXIT_FAILURE);
-    }
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", nlines);
+		clear_vglo();
+		exit(EXIT_FAILURE);
+	}
 
-    printf("%d\n", (*head)->n);
+	printf("%d\n", (*head)->n);
 }
 
 /**
@@ -88,22 +88,22 @@ void _pint(stack_t **head, unsigned int nlines)
  */
 void _pop(stack_t **head, unsigned int nlines)
 {
-    stack_t *h;
+	stack_t *h;
 
-    if (head == NULL || *head == NULL)
-    {
-        fprintf(stderr, "L%u: can't pop an empty stack\n", nlines);
-        clear_vglo();
-        exit(EXIT_FAILURE);
-    }
-    h = *head;
-    *head = (*head)->next;
-    free(h);
+	if (head == NULL || *head == NULL)
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", nlines);
+		clear_vglo();
+		exit(EXIT_FAILURE);
+	}
+
+	h = *head;
+	*head = (*head)->next;
+	free(h);
 }
 
-
 /**
- * _swap - swaps thw top two elements of the stack
+ * _swap - swaps the top two elements of the stack
  *
  * @head: head of the linked list
  * @nlines: line number
@@ -111,25 +111,25 @@ void _pop(stack_t **head, unsigned int nlines)
  */
 void _swap(stack_t **head, unsigned int nlines)
 {
-    int n = 0;
-    stack_t *h = NULL;
+	int n = 0;
+	stack_t *h = NULL;
 
-    h = *head;
+	h = *head;
 
-    for (; h != NULL; h = h->next, n++)
-        ;
+	for (; h != NULL; h = h->next, n++)
+		;
 
-    if (n < 2)
-    {
-        fprintf(stderr, "L%u: can't swap, stack too short\n", nlines);
-        clear_vglo();
-        exit(EXIT_FAILURE);
-    }
+	if (n < 2)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", nlines);
+		clear_vglo();
+		exit(EXIT_FAILURE);
+	}
 
-    h = *head;
-    *head = (*head)->next;
-    h->next = (*head)->next;
-    h->prev = *head;
-    (*head)->next = h;
-    (*head)->prev = NULL;
+	h = *head;
+	*head = (*head)->next;
+	h->next = (*head)->next;
+	h->prev = *head;
+	(*head)->next = h;
+	(*head)->prev = NULL;
 }
